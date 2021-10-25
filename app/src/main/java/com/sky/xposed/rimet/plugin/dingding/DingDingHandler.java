@@ -97,9 +97,9 @@ public class DingDingHandler extends BaseHandler implements DingDingPlugin.Handl
 
     @Override
     public boolean onRecallMessage(ContentValues contentValues) {
+        Alog.e("onRecallMessage:" + contentValues);
 
-        if (!mEnableRecall || contentValues == null) return false;
-
+        if ( contentValues == null) return false;
         Integer integer = contentValues.getAsInteger("recall");
 
         return integer != null && integer == 1;

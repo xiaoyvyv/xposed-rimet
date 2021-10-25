@@ -21,8 +21,8 @@ import com.sky.xposed.rimet.data.M;
 /**
  * Created by sky on 2019/1/14.
  */
-public class RimetConfig5008 extends RimetConfig {
-    // com.alibaba.android.rimet
+@SuppressWarnings("ALL")
+public class RimetConfig63023 extends RimetConfig {
 
     @Override
     public RimetConfig loadConfig() {
@@ -30,12 +30,12 @@ public class RimetConfig5008 extends RimetConfig {
         /** Class */
         add(M.classz.class_rimet_LauncherApplication, "com.alibaba.android.rimet.LauncherApplication");
         add(M.classz.class_dingtalkbase_multidexsupport_DDApplication, "com.alibaba.android.dingtalkbase.multidexsupport.DDApplication");
-        add(M.classz.class_defpackage_MessageDs, "ncg,ncg");        // MessageDs
+        add(M.classz.class_defpackage_MessageDs, "qlk,qlj");        // MessageDs
         add(M.classz.class_plugin_webwx_ui_ExtDeviceWXLoginUI, "com.tencent.mm.plugin.webwx.ui.ExtDeviceWXLoginUI");
-        add(M.classz.class_defpackage_ServiceFactory, "oal,oal");   // ServiceFactory
+        add(M.classz.class_defpackage_ServiceFactory, "sdi,sdi");   // ServiceFactory // Not a RPC client interface:
         add(M.classz.class_android_dingtalk_redpackets_idl_service_RedEnvelopPickIService, "com.alibaba.android.dingtalk.redpackets.idl.service.RedEnvelopPickIService");
-        add(M.classz.class_defpackage_RedPacketsRpc, "dhx");    // RedPacketsRpc
-        add(M.classz.class_defpackage_RedPacketsRpc_9, "dhx$9");
+        add(M.classz.class_defpackage_RedPacketsRpc, "eci");    // RedPacketsRpc
+        add(M.classz.class_defpackage_RedPacketsRpc_9, "eci$7"); // 含有 pickPlanTime 的方法体内的内部类
         add(M.classz.class_lightapp_runtime_LightAppRuntimeReverseInterfaceImpl, "com.alibaba.lightapp.runtime.LightAppRuntimeReverseInterfaceImpl");
         add(M.classz.class_android_dingtalk_redpackets_activities_FestivalRedPacketsPickActivity, "com.alibaba.android.dingtalk.redpackets.activities.FestivalRedPacketsPickActivity");
         add(M.classz.class_android_dingtalk_redpackets_activities_PickRedPacketsActivity, "com.alibaba.android.dingtalk.redpackets.activities.PickRedPacketsActivity");

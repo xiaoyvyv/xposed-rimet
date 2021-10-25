@@ -31,6 +31,7 @@ import com.sky.xposed.common.ui.view.CommonFrameLayout;
 import com.sky.xposed.common.ui.view.EditTextItemView;
 import com.sky.xposed.common.ui.view.SimpleItemView;
 import com.sky.xposed.common.ui.view.SwitchItemView;
+import com.sky.xposed.common.util.Alog;
 import com.sky.xposed.common.util.DisplayUtil;
 import com.sky.xposed.rimet.BuildConfig;
 import com.sky.xposed.rimet.Constant;
@@ -38,6 +39,7 @@ import com.sky.xposed.rimet.contract.RimetContract;
 import com.sky.xposed.rimet.data.model.UpdateModel;
 import com.sky.xposed.rimet.plugin.interfaces.XConfig;
 import com.sky.xposed.rimet.plugin.interfaces.XPlugin;
+import com.sky.xposed.rimet.plugin.interfaces.XPluginManager;
 import com.sky.xposed.rimet.ui.activity.MapActivity;
 import com.sky.xposed.rimet.ui.util.ActivityUtil;
 import com.sky.xposed.rimet.ui.util.DialogUtil;
@@ -123,8 +125,17 @@ public class DingDingDialog extends CommonDialog implements RimetContract.View {
         tvExt.setTextSize(12);
 
         SharedPreferences preferences = getDefaultSharedPreferences();
-        XPlugin xPlugin = getPluginManager().getXPluginById(Constant.Plugin.DING_DING);
+        XPluginManager pluginManager = getPluginManager();
+        if (pluginManager == null) {
+            Alog.e("XPluginManager == null!!!");
+            return;
+        }
+        XPlugin xPlugin = pluginManager.getXPluginById(Constant.Plugin.DING_DING);
 
+        if (xPlugin == null) {
+            Alog.e("xPlugin:XPlugin");
+            return;
+        }
         sivLuckyEnable.bind(getDefaultSharedPreferences(),
                 Integer.toString(Constant.XFlag.ENABLE_LUCKY), true,
                 (view1, key, value) -> {
@@ -179,7 +190,7 @@ public class DingDingDialog extends CommonDialog implements RimetContract.View {
         });
 
         // 是否支持版本
-        XConfig xConfig = getPluginManager().getVersionManager().getSupportConfig();
+        XConfig xConfig = pluginManager.getVersionManager().getSupportConfig();
         setPromptText(xConfig != null ? "" : "不支持当前版本!");
     }
 

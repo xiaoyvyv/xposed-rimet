@@ -19,6 +19,7 @@ package com.sky.xposed.rimet.data;
 /**
  * Created by sky on 2019/3/12.
  */
+@SuppressWarnings("ALL")
 public final class M {
 
     private M() {

@@ -46,6 +46,7 @@ import com.sky.xposed.rimet.data.config.RimetConfig5000;
 import com.sky.xposed.rimet.data.config.RimetConfig5005;
 import com.sky.xposed.rimet.data.config.RimetConfig5006;
 import com.sky.xposed.rimet.data.config.RimetConfig5008;
+import com.sky.xposed.rimet.data.config.RimetConfig63023;
 import com.sky.xposed.rimet.data.model.ConfigModel;
 import com.sky.xposed.rimet.data.model.VersionModel;
 import com.sky.xposed.rimet.plugin.interfaces.XConfig;
@@ -179,6 +180,7 @@ public class VersionManager implements XVersionManager {
             CONFIG_MAP.put("5.0.5", RimetConfig5005.class);
             CONFIG_MAP.put("5.0.6", RimetConfig5006.class);
             CONFIG_MAP.put("5.0.8", RimetConfig5008.class);
+            CONFIG_MAP.put("6.3.0", RimetConfig63023.class);
         }
 
         private VersionInfo mVersionInfo;

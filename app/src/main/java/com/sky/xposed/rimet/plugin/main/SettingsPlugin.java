@@ -45,12 +45,12 @@ public class SettingsPlugin extends BasePlugin {
 
     @Override
     public void onHandleLoadPackage() {
-
-        findMethod(
-                "com.alibaba.android.user.settings.activity.NewSettingActivity",
-                "onCreate",
-                Bundle.class)
-                .after(param -> onHnalderSettings((Activity) param.thisObject));
+//
+//        findMethod(
+//                "com.alibaba.android.user.settings.activity.NewSettingActivity",
+//                "onCreate",
+//                Bundle.class)
+//                .after(param -> onHnalderSettings((Activity) param.thisObject));
 
         findMethod(
                 "com.alibaba.android.user.settings.activity.UserSettingsActivity",
@@ -60,7 +60,6 @@ public class SettingsPlugin extends BasePlugin {
     }
 
     private void onHnalderSettings(Activity activity) {
-
         View view = activity.findViewById(ResourceUtil.getId(activity, "setting_msg_notice"));
         ViewGroup viewGroup = (ViewGroup) view.getParent();
 

@@ -26,6 +26,7 @@ import com.sky.xposed.javax.XposedPlus;
 import com.sky.xposed.javax.XposedUtil;
 import com.sky.xposed.rimet.plugin.PluginManager;
 import com.sky.xposed.rimet.plugin.interfaces.XPluginManager;
+import com.sky.xposed.rimet.util.LogUtils;
 
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
@@ -42,8 +43,10 @@ public class Main implements IXposedHookLoadPackage, MethodHook.ThrowableCallbac
 
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpParam) throws Throwable {
-
-        if (!Constant.Rimet.PACKAGE_NAME.equals(lpParam.packageName)) return;
+        if (!Constant.Rimet.PACKAGE_NAME.equals(lpParam.packageName)) {
+            return;
+        }
+        LogUtils.log("钉钉 Hook");
 
         // 设置默认的参数
         XposedPlus.setDefaultInstance(new XposedPlus.Builder(lpParam)
@@ -71,6 +74,8 @@ public class Main implements IXposedHookLoadPackage, MethodHook.ThrowableCallbac
 
                         // 开始处理加载的包
                         pluginManager.handleLoadPackage();
+
+                        LogUtils.log("钉钉 开始处理加载的包");
                     }
                 });
     }

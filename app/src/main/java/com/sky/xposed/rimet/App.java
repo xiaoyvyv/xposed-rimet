@@ -29,9 +29,7 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
         Alog.setDebug(BuildConfig.DEBUG);
-
         // 初始化
         ToastUtil.getInstance().init(getApplicationContext());
     }

@@ -31,6 +31,7 @@ import com.sky.xposed.rimet.plugin.interfaces.XPluginManager;
 import com.sky.xposed.rimet.plugin.interfaces.XVersionManager;
 
 import java.lang.reflect.Method;
+import java.util.Arrays;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
@@ -146,6 +147,8 @@ public abstract class BasePlugin implements XPlugin {
         String[] methodNames = methodNameList.split(",");
 
         for (int i = 0; i < classNames.length; i++) {
+            String params = Arrays.toString(parameterTypes);
+            Alog.e("查找方法：class: " + classNames[i] + ", method: " + methodNames[i] + ", param: " + params);
 
             Method method = findMethodExactIfExists(
                     classNames[i], methodNames[i], parameterTypes);

@@ -20,6 +20,7 @@ package com.sky.xposed.rimet;
  * Created by sky on 2019/3/14.
  */
 public interface Constant {
+    String TAG = "DDHelper";
 
     interface Service {
 

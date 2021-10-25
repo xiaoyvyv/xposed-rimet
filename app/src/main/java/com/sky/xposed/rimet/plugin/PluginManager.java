@@ -97,10 +97,6 @@ public class PluginManager implements XPluginManager {
         ToastUtil.getInstance().init(mContext);
         Picasso.setSingletonInstance(new Picasso.Builder(mContext).build());
 
-        // 添加统计
-        CrashReport.initCrashReport(mContext, "3f1c04b5b5", BuildConfig.DEBUG);
-        CrashReport.setAppChannel(mContext, BuildConfig.FLAVOR);
-
         // 个别需要静态引用
         sXPluginManager = this;
     }

@@ -20,6 +20,7 @@ import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 
+import com.sky.xposed.common.util.Alog;
 import com.sky.xposed.rimet.Constant;
 import com.sky.xposed.rimet.data.M;
 import com.sky.xposed.rimet.data.model.PluginInfo;
@@ -66,51 +67,63 @@ public class DingDingPlugin extends BasePlugin {
     @Override
     public void onHandleLoadPackage() {
 
+        Alog.e("DingDingPlugin：onHandleLoadPackage");
+
         findMethod(
                 M.classz.class_lightapp_runtime_LightAppRuntimeReverseInterfaceImpl,
                 M.method.method_lightapp_runtime_LightAppRuntimeReverseInterfaceImpl_initSecurityGuard,
                 Context.class)
-                .before(param -> param.setResult(null));
+                .before(param -> {
+                    Alog.e("DingDingPlugin：initSecurityGuard --> null");
 
-        Method methodMessage = findMatcherMethod(
-                M.classz.class_defpackage_MessageDs,
-                M.method.method_defpackage_MessageDs_handler,
-                String.class, Collection.class, boolean.class);
-
-        XposedBridge.hookMethod(methodMessage, new XC_MethodHook() {
-            @Override
-            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                super.afterHookedMethod(param);
-                // 处理消息
-                mHandler.onHandlerMessage((String) param.args[0], (Collection) param.args[1]);
-            }
-        });
-
-        findMethod(
-                M.classz.class_android_dingtalk_redpackets_activities_FestivalRedPacketsPickActivity,
-                M.method.method_android_dingtalk_redpackets_activities_FestivalRedPacketsPickActivity_initView)
-                .after(param -> {
-                    // 处理快速打开红包
-                    mHandler.onHandlerFestivalRedPacketsPick((Activity) param.thisObject);
+                    param.setResult(null);
                 });
+//
+//        Method methodMessage = findMatcherMethod(
+//                M.classz.class_defpackage_MessageDs,
+//                M.method.method_defpackage_MessageDs_handler,
+//                String.class, Collection.class, boolean.class);
+//
+//        XposedBridge.hookMethod(methodMessage, new XC_MethodHook() {
+//            @Override
+//            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+//                super.afterHookedMethod(param);
+//                // 处理消息
+//                mHandler.onHandlerMessage((String) param.args[0], (Collection) param.args[1]);
+//            }
+//        });
+//
+//        findMethod(
+//                M.classz.class_android_dingtalk_redpackets_activities_FestivalRedPacketsPickActivity,
+//                M.method.method_android_dingtalk_redpackets_activities_FestivalRedPacketsPickActivity_initView)
+//                .after(param -> {
+//                    // 处理快速打开红包
+//                    mHandler.onHandlerFestivalRedPacketsPick((Activity) param.thisObject);
+//                });
+//
+//        findMethod(
+//                M.classz.class_android_dingtalk_redpackets_activities_PickRedPacketsActivity,
+//                M.method.method_android_dingtalk_redpackets_activities_PickRedPacketsActivity_initView)
+//                .after(param -> {
+//                    // 处理快速打开红包
+//                    mHandler.onHandlerPickRedPackets((Activity) param.thisObject);
+//                });
 
-        findMethod(
-                M.classz.class_android_dingtalk_redpackets_activities_PickRedPacketsActivity,
-                M.method.method_android_dingtalk_redpackets_activities_PickRedPacketsActivity_initView)
-                .after(param -> {
-                    // 处理快速打开红包
-                    mHandler.onHandlerPickRedPackets((Activity) param.thisObject);
-                });
+        Alog.e("DingDingPlugin：findMatcherMethod methodRecall");
 
         Method methodRecall = findMatcherMethod(
                 M.classz.class_defpackage_MessageDs,
                 M.method.method_defpackage_MessageDs_recall,
                 String.class, List.class, ContentValues.class);
 
+        Alog.e("DingDingPlugin：findMatcherMethod methodRecall isNull =" + (methodRecall == null));
+
         XposedBridge.hookMethod(methodRecall, new XC_MethodHook() {
             @Override
             protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                 super.beforeHookedMethod(param);
+
+                Alog.e("DingDingPlugin findMatcherMethod: methodRecall --> Success");
 
                 // 处理撤回消息
                 if (mHandler.onRecallMessage((ContentValues) param.args[2])) {
